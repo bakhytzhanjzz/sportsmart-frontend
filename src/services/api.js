@@ -33,16 +33,19 @@ api.interceptors.response.use(
   }
 );
 
+// services/api.js
 export const authAPI = {
   login: (credentials) => api.post('/api/auth/login', credentials),
-  register: (data) => 
-    api.post('/api/auth/register', {
+  register: (data) => {
+    const payload = {
       email: data.email,
       username: data.username,
-      password: data.password,
-      fullName: data.fullName || '',
-    }),
-};
+      password: data.password
+    }
+    return api.post('/api/auth/register', payload)
+  },
+}
+
 
 export const stepsAPI = {
   uploadSteps: (data, idempotencyKey) => 

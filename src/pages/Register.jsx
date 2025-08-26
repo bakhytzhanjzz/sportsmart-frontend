@@ -11,7 +11,6 @@ const Register = () => {
     email: '',
     username: '',
     password: '',
-    fullName: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -145,21 +144,6 @@ const Register = () => {
                     />
                   </div>
                   {errors.username && <p className="text-rose-500 text-xs mt-1 ml-1">{errors.username}</p>}
-                </div>
-
-                {/* Full Name */}
-                <div>
-                  <div className="relative">
-                    <FileText className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      className="w-full pl-11 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-slate-800 placeholder-slate-400"
-                      placeholder="Полное имя (необязательно)"
-                    />
-                  </div>
                 </div>
 
                 {/* Password */}

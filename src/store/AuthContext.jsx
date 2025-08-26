@@ -77,27 +77,34 @@ export const AuthProvider = ({ children }) => {
   )
 
   const register = useCallback(
-    async (userData) => {
-      try {
-        dispatch({ type: "SET_LOADING", payload: true })
-        const response = await authAPI.register(userData)
-        const { accessToken } = response.data
+  async (userData) => {
+    try {
+      dispatch({ type: "SET_LOADING", payload: true });
 
-        localStorage.setItem("accessToken", accessToken)
+      // Register user
+      await authAPI.register(userData);
 
-        const userRes = await profileAPI.getMe()
-        setUser(userRes.data)
+      // Log in using correct field name
+      const loggedIn = await login({
+        usernameOrEmail: userData.email,    // ← Critical fix
+        password: userData.password,
+      });
 
-        toast.success("Регистрация успешна!")
-        return true
-      } catch (error) {
-        toast.error(error.response?.data?.message || "Ошибка регистрации")
-        dispatch({ type: "SET_LOADING", payload: false })
-        return false
+      if (loggedIn) {
+        toast.success("Регистрация успешна!");
+        return true;
       }
-    },
-    [setUser],
-  )
+      return false;
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Ошибка регистрации");
+      dispatch({ type: "SET_LOADING", payload: false });
+      return false;
+    }
+  },
+  [login],
+);
+
+
 
   const logout = useCallback(() => {
     localStorage.removeItem("accessToken")
