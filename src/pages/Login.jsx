@@ -36,15 +36,19 @@ const Login = () => {
           <div className="text-center space-y-6">
             <div className="flex justify-center mb-8">
               <div className="relative">
-                <div className="w-32 h-32 bg-white rounded-3xl shadow-2xl flex items-center justify-center border border-slate-100">
+                <div className="w-32 h-32 bg-white rounded-full shadow-2xl flex items-center justify-center border border-slate-100">
                   <img 
-                    src="/src/assets/logo.png" 
+                    src="/logo.png" 
                     alt="SportSmart Logo" 
                     className="w-30 h-30 object-contain"
                   />
                 </div>
-                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
-                  <Activity className="w-5 h-5 text-amber-400" />
+                <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg border border-slate-100">
+                  <img 
+                    src="/logo-mini.png" 
+                    alt="Mini Logo" 
+                    className="w-6 h-6 object-contain"
+                  />
                 </div>
               </div>
             </div>
@@ -58,6 +62,7 @@ const Login = () => {
               </p>
             </div>
           </div>
+    
 
           {/* Login Form */}
           <div className="space-y-6">
@@ -143,12 +148,16 @@ const Login = () => {
         <div className="max-w-sm mx-auto">
           <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-4">
             <div className="flex items-center justify-center space-x-3">
-              <div className="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center">
-                <Activity className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                <img 
+                  src="/logo-mini.png" 
+                  alt="Mini Logo" 
+                  className="w-5 h-5 object-contain"
+                />
               </div>
               <div className="text-center">
                 <p className="text-white text-sm font-semibold">SportSmart</p>
-                <p className="text-slate-400 text-xs">Отслеживайте прогресс каждый день</p>
+                <p className="text-slate-400 text-xs">Начните свой фитнес-путь сегодня</p>
               </div>
             </div>
           </div>

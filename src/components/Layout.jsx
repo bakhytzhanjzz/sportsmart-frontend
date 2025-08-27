@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Users, Heart, User, LogOut, Activity } from 'lucide-react';
+import { Home, Users, Heart, User, LogOut } from 'lucide-react';
 
 import { useAuth } from '../store/AuthContext';
 
@@ -20,8 +20,12 @@ const Layout = ({ children }) => {
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl">
-                <Activity className="w-6 h-6 text-white" />
+              <div className="p-2 bg-white rounded-xl">
+                <img 
+                  src="/logo-mini.png" 
+                  alt="Mini Logo" 
+                  className="w-10 h-10 object-contain"
+                />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-slate-800">SportSmart</h1>
