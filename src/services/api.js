@@ -93,7 +93,9 @@ export const authAPI = {
     }),
   refresh: (refreshToken) =>
     api.post("/api/auth/refresh", { refreshToken }),
+  googleLogin: (data) => api.post("/api/auth/google", data),
 };
+
 
 export const stepsAPI = {
   uploadSteps: (data, idempotencyKey) =>
