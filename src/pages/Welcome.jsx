@@ -1,40 +1,21 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Activity } from 'lucide-react';
-import { useAuth } from '../store/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { Activity } from 'lucide-react';
 
-const Login = () => {
+const Welcome = () => {
   const navigate = useNavigate();
-  const { login, loading } = useAuth();
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    usernameOrEmail: '',
-    password: '',
-  });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const success = await login(formData);
-    if (success) {
-      navigate('/dashboard');
-    }
-  };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleGetStarted = () => {
+    navigate('/register');
   };
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center px-4 py-8">
-        <div className="w-full max-w-sm space-y-6">
-          {/* Logo and Branding */}
-          <div className="text-center space-y-4">
-            <div className="flex justify-center">
+        <div className="w-full max-w-sm space-y-8">
+          {/* Logo and Welcome Text */}
+          <div className="text-center space-y-8">
+            <div className="flex justify-center mb-8">
               <img 
                 src="/logo.png" 
                 alt="SportSmart Logo" 
@@ -42,91 +23,33 @@ const Login = () => {
               />
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-4">
               <h1 className="text-3xl font-bold text-slate-800">
-                Вход в систему
+                Добро пожаловать в SportSmart!
               </h1>
-              <p className="text-slate-600 text-sm">
-                Ваш персональный фитнес-трекер
+              <p className="text-slate-600 text-lg">
+                Начните свой фитнес путь сегодня!
               </p>
             </div>
           </div>
-    
 
-          {/* Login Form */}
+          {/* Get Started Button */}
           <div className="space-y-6">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-4">
-                <div>
-                  <input
-                    type="text"
-                    name="usernameOrEmail"
-                    value={formData.usernameOrEmail}
-                    onChange={handleChange}
-                    className="w-full px-4 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-slate-800 placeholder-slate-400"
-                    placeholder="Имя пользователя или email"
-                    required
-                  />
-                </div>
-
-                <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className="w-full px-4 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-amber-500 focus:border-transparent pr-12 transition-all text-slate-800 placeholder-slate-400"
-                    placeholder="Пароль"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </button>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-4 px-6 rounded-2xl hover:from-amber-600 hover:to-amber-700 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-all duration-200 font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg transform active:scale-95"
-              >
-                {loading ? (
-                  <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                ) : (
-                  <span>Войти в аккаунт</span>
-                )}
-              </button>
-            </form>
-
-            {/* Divider */}
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-slate-50 text-slate-500">или</span>
-              </div>
-            </div>
-
-            {/* Register Link */}
-            <Link 
-              to="/register"
-              className="w-full bg-white border-2 border-slate-200 text-slate-700 py-4 px-6 rounded-2xl hover:bg-slate-50 hover:border-slate-300 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-all duration-200 font-medium flex items-center justify-center transform active:scale-95"
+            <button
+              onClick={handleGetStarted}
+              className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-5 px-6 rounded-2xl hover:from-amber-600 hover:to-amber-700 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-all duration-200 font-semibold flex items-center justify-center shadow-lg transform active:scale-95 space-x-3"
             >
-              Создать новый аккаунт
-            </Link>
+              <Activity className="w-6 h-6" />
+              <span className="text-lg">Шагомер</span>
+            </button>
           </div>
 
           {/* Footer Info */}
           <div className="text-center space-y-4">
             <div className="flex items-center justify-center space-x-4 text-xs text-slate-500">
-              <span>Безопасный вход</span>
+              <span>Фитнес-трекер</span>
               <div className="w-1 h-1 bg-slate-400 rounded-full"></div>
-              <span>Защита данных</span>
+              <span>Здоровый образ жизни</span>
             </div>
           </div>
         </div>
@@ -184,4 +107,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Welcome;

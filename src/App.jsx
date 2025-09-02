@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './store/AuthContext';
 import Layout from './components/Layout';
+import Welcome from './pages/Welcome';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -27,8 +28,20 @@ const PublicRoute = ({ children }) => {
 };
 
 const AppRoutes = () => {
+  const { isAuthenticated, loading } = useAuth();
+  
+  // Show welcome page for unauthenticated users on root path
+  const WelcomeOrDashboard = () => {
+    if (loading) return <LoadingSpinner />;
+    
+    return isAuthenticated ? 
+      <Navigate to="/dashboard" /> : 
+      <Welcome />;
+  };
+
   return (
     <Routes>
+      <Route path="/" element={<WelcomeOrDashboard />} />
       <Route path="/login" element={
         <PublicRoute>
           <Login />
@@ -39,7 +52,6 @@ const AppRoutes = () => {
           <Register />
         </PublicRoute>
       } />
-      <Route path="/" element={<Navigate to="/dashboard" />} />
       <Route path="/dashboard" element={
         <ProtectedRoute>
           <Layout>
